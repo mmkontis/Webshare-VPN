@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Webshare VPN</title><link rel="stylesheet" href="popup.css"></head>
+<body><div class="popup-shell">
+  <header><img src="icons/on-48.png" width="36" height="36" alt=""><div><h1>Webshare VPN</h1><p>Your route. Your speed.</p></div></header>
+  <nav class="tabs" role="tablist" aria-label="Extension tabs"><button id="tab-overview" role="tab" aria-selected="true" aria-controls="overview">Overview</button><button id="tab-settings" role="tab" aria-selected="false" aria-controls="settings-panel" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1z"/><circle cx="12" cy="12" r="3"/></svg>Settings</button></nav>
+  <main id="overview" role="tabpanel" aria-labelledby="tab-overview">
+    <section class="status-row"><span id="status" class="status"><i></i><span id="status-label">Proxy off</span></span><button id="toggle" class="toggle" role="switch" aria-checked="false" aria-label="Enable proxy"><span></span></button></section>
+    <section class="meter"><div class="eyebrow">DOWNLOAD SPEED</div><div class="reading"><span id="speed">—</span><span class="unit">Mbps</span><div class="latency-reading" title="Median HTTPS response time to Cloudflare from three small requests"><span>HTTP LATENCY</span><strong><b id="latency">—</b><small>ms</small></strong></div></div><div class="scale"><span>0.1</span><div><i id="scale-fill"></i></div><span>100+</span></div><p id="measurement-note">Run a test to measure this route.</p></section>
+    <label class="field" for="route">Proxy location<select id="route"></select></label><p id="endpoint" class="endpoint"></p>
+    <div class="details"><div><span>Exit IP</span><strong id="exit-ip">Not checked</strong></div><div><span>Connection</span><strong id="connection">Not checked</strong></div><div><span>Sites</span><strong id="routing-summary">ChatGPT only</strong></div></div>
+    <button id="test" class="primary">Test speed and latency</button><button id="test-all" class="secondary">Test all proxies</button>
+    <section id="batch-results" hidden aria-label="Speed comparison"><div class="batch-heading"><strong>Speed comparison</strong><span id="batch-progress" aria-live="polite"></span></div><p id="batch-summary" aria-live="polite"></p><div class="result-columns"><span>Route</span><span>Mbps</span><span>ms</span></div><div id="results-list"></div><p class="help">Sorted by download speed. Lower latency is better.</p></section>
+  </main>
+  <section id="settings-panel" role="tabpanel" aria-labelledby="tab-settings" hidden>
+    <section class="settings-section panel-option"><h2>Rounded webpage panel</h2><p class="help">Chrome controls the toolbar popup’s outer frame. Open the meter inside the current webpage for fully rounded edges.</p><button id="open-panel" class="secondary">Open rounded panel</button></section>
+    <section class="settings-section"><h2>Proxy websites</h2><p class="help">Choose where to use your selected proxy when it is active.</p>
+      <fieldset class="scope-options"><legend class="sr-only">Proxy scope</legend><label><input type="radio" name="scope" id="scope-selected" value="selected" checked><span>Selected sites</span></label><label><input type="radio" name="scope" id="scope-all" value="all"><span>All sites</span></label></fieldset>
+      <p id="scope-note" class="help">Selected sites and their subdomains use the proxy.</p>
+      <div id="site-list" class="site-list"></div>
+      <form id="add-site-form" class="add-site"><label class="sr-only" for="new-site">Website domain</label><input id="new-site" placeholder="Add a website, e.g. example.com" autocomplete="off" spellcheck="false"><button type="submit" aria-label="Add website">+</button></form>
+      <button id="save-sites" class="primary">Save site settings</button>
+    </section>
+    <section class="settings-section"><div class="section-heading"><h2>Proxy credentials</h2><span id="credential-state">Setup needed</span></div><form id="credential-form"><label class="field">Username<input id="username" autocomplete="off" spellcheck="false"></label><label class="field">Password<input id="password" type="password" autocomplete="off" placeholder="Enter proxy password"></label><button class="secondary" type="submit">Save credentials</button><p class="help">Stored only in this Chrome profile.</p></form></section>
+    <section class="settings-section"><h2>About speed tests</h2><p class="help">Tests download up to 5 MB from Cloudflare and check your exit IP with Webshare. Test all compares all 10 proxies and your browser default route, uses up to 55 MB, and restores your original route.</p><p class="help">This measures download speed and HTTPS response latency through the selected route. Latency is the median of three small requests to Cloudflare, includes the network and server response, and is not ChatGPT model generation time. Reload open websites after changing the proxy or site settings. Local and private network addresses stay direct.</p></section>
+  </section>
+  <p id="message" role="status" aria-live="polite" hidden></p>
+</div><script type="module" src="popup.js"></script></body></html>

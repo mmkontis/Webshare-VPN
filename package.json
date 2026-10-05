@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "name": "webshare-vpn",
+  "version": "1.4.0",
+  "description": "Chrome proxy selector with download speed and latency measurement"
+}
