@@ -4,9 +4,13 @@ A Chrome extension for Webshare proxies, with site routing, a green active indic
 
 This is an independent project, not an official Webshare product. It routes supported Chrome traffic through HTTP proxies. It does not create a system VPN tunnel.
 
+[Preview and setup guide](https://humanlike.co/apps/webshare-vpn).
+
 [Download the latest ZIP](https://github.com/mmkontis/Webshare-VPN/releases/latest) and extract it before loading it into Chrome. Credentials are entered locally and are not included in the repository or release.
 
 ## Install
+
+First replace the starter `ROUTES` addresses and ports in `core.js` with your own Webshare proxy list. Each Webshare account has its own endpoints. Then:
 
 1. Open `chrome://extensions` in Chrome.
 2. Turn on Developer mode.
